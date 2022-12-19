@@ -3,10 +3,15 @@
 
 #include <map>
 
-class basket
+class Basket
 {
-	public:
-	private:
+public:
+	void add();
+	void remove();
+	void show();
+private:
+	std::map<int,int> basket;
+
 };
 
 
