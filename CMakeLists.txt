@@ -8,7 +8,7 @@ project(Task_33_1)
 #link_directories(${Boost_LIBRARY_DIR})
 #add_library(${PROJECT_NAME})
 #target_link_libraries(${PROJECT_NAME} ${Boost_LIBRARIES})
-
+set(MY_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/include)
 add_subdirectory(src)
 
 
