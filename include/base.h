@@ -2,18 +2,79 @@
 
 #include <map>
 #include <string>
+#include <ctime>
+#include <iostream>
 
-class Base
+enum Color
+{
+    BLK, // Черный
+    WTE, // Белый
+    PNK, // Розовый
+    GRE, // Зеленый
+    BLU, // Синий
+    GRY, // Серый
+    ORG // Оранжевый
+};
+
+enum SizeType
+{
+    XS,
+    S,
+    M,
+    L,
+    XL,
+    XXL,
+    XXXL
+};
+
+enum Brand
+{
+    BL, // Balenciaga
+    GC, // Gucci
+    PD, // Prada
+    LV, // Louis Vuitton
+    MN, // Moncler
+    DR, // Dior
+    FD, // Fendi
+    VR, // Versace 
+};
+
+enum Sex
+{
+    ML,
+    FM
+}; 
+
+enum Category
+{
+    JN, //Jeans
+    PN, // Pants
+    ST, //Shirt
+    TS, // T-shirt
+    SR, // Shorts
+}; 
+
+class Object
 {
 
 public:
-    Base(/* args */);
-    ~Base();
+    Object();
+    Object(bool autoArticle, int amount);
+    ~Object();
 
-    void add(std::string article, int amount);
-    void remove(std::string article, int amount);
-    void show() const;
+    void addBase(std::string article, int amount);
+    void removeBase(std::string article, int amount);
+    void showBase() const;
 
-protected:
+    void addBasket(std::string article, int amount);
+    void removeBasket(std::string article, int amount);
+    void showBasket() const;
+
+    std::string creatArticle();
+
+private:
     std::map<std::string, int> base;
+    std::map<std::string, int> basket;
+
+    
 };
