@@ -35,7 +35,6 @@ void Object::removeBase(const std::string &article, const int amount)
     }
     else
     {
-
         std::cerr << "The item you entered is missing." << std::endl;
     }
 }

@@ -1,5 +1,14 @@
 #include "base.h"
 #include "menu.h"
+#include <regex>
+#include <string>
+
+bool is_valid_article(std::string& str)
+{
+	const std::regex txt_regex("[A-Z]{2}-[A-Z]{2}-[A-Z]{2}-[A-Z]{3}-[A-Z]{1}");
+
+	return std::regex_match(str, txt_regex);
+}
 
 int main()
 {
@@ -23,7 +32,24 @@ int main()
 				input = 0;
 				break;
 			case 1: // Add a product to the store database
+				std::cout << "Enter the article in the format <XX>-<XX>-<XX>-<XXX>-<X> :";
+				std::cin.ignore();
+				std::getline(std::cin, buffer);
+				if (!(is_valid_article(buffer)))
+				{
+					throw std::invalid_argument("not correct article");
+					break;
+				}
+				std::cout  << "Enter Quantity: ";
+				std::cin >>amount;
 
+				if(amount < 0)
+				{
+					throw std::invalid_argument("amount < 0");
+					break;
+				}
+
+				modex.addBase(buffer, amount);
 				break;
 			case 2: // Add item to cart
 
@@ -50,7 +76,7 @@ int main()
 			case 7: // Remove item from cart
 				break;
 			default:
-				throw std::runtime_error ("*** Invalid input command ***");				
+				throw std::runtime_error("*** Invalid input command ***");
 				break;
 
 			case 8: // Paying for items in the cart
