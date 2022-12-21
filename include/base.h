@@ -59,7 +59,6 @@ class Object
 
 public:
     Object();
-    Object(bool autoArticle, int amount);
     ~Object();
 
     void addBase(std::string article, int amount);

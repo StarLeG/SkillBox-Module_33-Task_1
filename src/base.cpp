@@ -4,26 +4,25 @@ Object::Object(/* args */)
 {
 }
 
-Object::Object(bool autoArticle, int amount)
-{
-    if (autoArticle)
-    {
-        for (int i = 0; i < amount; i++)
-        {
-        }
-    }
-}
-
 Object::~Object()
 {
 }
 
 void Object::addBase(std::string article, int amount)
 {
-    this->base.insert(std::make_pair(article, amount));
+	if(this->base.find(article) == this->base.end())
+	{
+		this->base.insert(std::make_pair(article, amount));
+	}
+	else
+	{
+		this->base.find(article)->second++;
+	}
+
 }
 void Object::removeBase(std::string article, int amount)
 {
+
 }
 void Object::showBase() const
 {
@@ -201,3 +200,4 @@ std::string Object::creatArticle()
 
     return article;
 }
+
