@@ -6,8 +6,6 @@
 #include <iostream>
 #include <stdlib.h>
 
-
-
 enum Color
 {
     BLK, // Черный
@@ -16,7 +14,7 @@ enum Color
     GRE, // Зеленый
     BLU, // Синий
     GRY, // Серый
-    ORG // Оранжевый
+    ORG  // Оранжевый
 };
 
 enum SizeType
@@ -39,23 +37,23 @@ enum Brand
     MN, // Moncler
     DR, // Dior
     FD, // Fendi
-    VR, // Versace 
+    VR, // Versace
 };
 
 enum Sex
 {
     ML,
     FM
-}; 
+};
 
 enum Category
 {
-    JN, //Jeans
+    JN, // Jeans
     PN, // Pants
-    ST, //Shirt
+    ST, // Shirt
     TS, // T-shirt
     SR, // Shorts
-}; 
+};
 
 class Object
 {
@@ -64,25 +62,23 @@ public:
     Object() = default;
     ~Object() = default;
 
-    void addBase(const std::string& article,const  int amount);
+    void addBase(const std::string &article, const int amount);
 
-    void removeBase(const std::string& article,const  int amount);
+    void removeBase(const std::string &article, const int amount);
 
     void showBase() const;
 
     void addBasket(const std::string &article, const int amount);
 
-    void removeBasket(const std::string& article,const  int amount);
-    
+    void removeBasket(const std::string &article, const int amount);
+
     void showBasket() const;
 
-	void pay();
+    void pay();
 
     std::string creatArticle();
 
 private:
     std::map<std::string, int> base;
     std::map<std::string, int> basket;
-
-    
 };

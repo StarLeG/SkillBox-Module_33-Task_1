@@ -3,7 +3,7 @@
 #include <regex>
 #include <string>
 
-bool is_valid_article(std::string& str)
+bool is_valid_article(std::string &str)
 {
 	const std::regex txt_regex("[A-Z]{2}-[A-Z]{2}-[A-Z]{2}-[A-Z]{3}-[A-Z]{1}");
 
@@ -28,7 +28,7 @@ int main()
 		{
 			switch (input)
 			{
-			case 0: // EXIT 
+			case 0: // EXIT
 				input = 0;
 				break;
 			case 1: // Add a product to the store database
@@ -37,28 +37,46 @@ int main()
 				std::getline(std::cin, buffer);
 				if (!(is_valid_article(buffer)))
 				{
-					throw std::invalid_argument("not correct article");
+					throw std::invalid_argument("Not correct article");
 					break;
 				}
-				std::cout  << "Enter Quantity: ";
-				std::cin >>amount;
+				std::cout << "Enter Quantity: ";
+				std::cin >> amount;
 
-				if(amount < 0)
+				if (amount < 0)
 				{
-					throw std::invalid_argument("amount < 0");
+					throw std::invalid_argument("Amount < 0");
 					break;
 				}
 
 				modex.addBase(buffer, amount);
 				break;
 			case 2: // Add item to cart
+				std::cout << "Enter the article in the format <XX>-<XX>-<XX>-<XXX>-<X> :";
+				std::cin.ignore();
+				std::getline(std::cin, buffer);
+				if (!(is_valid_article(buffer)))
+				{
+					throw std::invalid_argument("Not correct article");
+					break;
+				}
+
+				std::cout << "Enter Quantity: ";
+				std::cin >> amount;
+
+				if (amount < 0)
+				{
+					throw std::invalid_argument("Amount < 0");
+					break;
+				}
 
 				modex.addBasket(buffer, amount);
+				modex.removeBase(buffer, amount);
 				break;
-			case 3: //Display products from the store database
+			case 3: // Display products from the store database
 				modex.showBase();
 				break;
-			case 4: //Display an item from the shopping cart
+			case 4: // Display an item from the shopping cart
 				modex.showBasket();
 				break;
 			case 5: // Automatic addition of goods to the store database
@@ -69,28 +87,52 @@ int main()
 				std::cout << "Enter the item number to delete: ";
 				std::cin.ignore();
 				std::getline(std::cin, buffer);
+				if (!(is_valid_article(buffer)))
+				{
+					throw std::invalid_argument("Not correct article");
+					break;
+				}
 				std::cout << "Enter the quantity of the item to be removed: ";
 				std::cin >> amount;
+				if (amount < 0)
+				{
+					throw std::invalid_argument("Amount < 0");
+					break;
+				}
 				modex.removeBase(buffer, amount);
 				break;
 			case 7: // Remove item from cart
+				std::cout << "Enter the item number to delete: ";
+				std::cin.ignore();
+				std::getline(std::cin, buffer);
+				if (!(is_valid_article(buffer)))
+				{
+					throw std::invalid_argument("Not correct article");
+					break;
+				}
+				std::cout << "Enter the quantity of the item to be removed: ";
+				std::cin >> amount;
+				if (amount < 0)
+				{
+					throw std::invalid_argument("Amount < 0");
+					break;
+				}
+				modex.removeBasket(buffer, amount);
+				modex.addBase(buffer, amount);
+				break;
+			case 8: // Paying for items in the cart
+				modex.pay();
 				break;
 			default:
 				throw std::runtime_error("*** Invalid input command ***");
 				break;
-
-			case 8: // Paying for items in the cart
-				break;
 			}
-
-
 		}
-		catch (const std::invalid_argument& ex)
+		catch (const std::invalid_argument &ex)
 		{
 			std::cerr << ex.what() << std::endl;
-
 		}
-		catch (const std::runtime_error& ex)
+		catch (const std::runtime_error &ex)
 		{
 			std::cerr << ex.what() << std::endl;
 		}
@@ -98,7 +140,6 @@ int main()
 		std::cout << "Your choice: ";
 		std::cin >> input;
 	}
-
 
 	return 0;
 }
