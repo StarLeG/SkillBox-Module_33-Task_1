@@ -14,15 +14,9 @@ void Object::addBase(const std::string &article, const int amount)
 
 void Object::removeBase(const std::string &article, const int amount)
 {
-    if (this->base.find(article) != this->base.end())
+    if (this->base.find(article) == this->base.end())
     {
         throw std::runtime_error("Item not found.");
-        return;
-    }
-
-    if (this->base.find(article)->second - amount < 0)
-    {
-        throw std::invalid_argument("amount < 0");
         return;
     }
 
@@ -32,7 +26,7 @@ void Object::removeBase(const std::string &article, const int amount)
         return;
     }
 
-    if ((this->base.find(article)->second - amount) > 0)
+    if ((this->base.find(article)->second - amount) >= 0)
     {
         (this->base.find(article)->second) -= amount;
         
@@ -74,7 +68,7 @@ void Object::addBasket(const std::string &article, const int amount)
         return;
     }
 
-    if (this->basket.find(article) == this->basket.end())
+    if (this->base.find(article) != this->base.end())
     {
         this->basket.insert(std::make_pair(article, amount));
     }
@@ -87,7 +81,7 @@ void Object::addBasket(const std::string &article, const int amount)
 
 void Object::removeBasket(const std::string &article, const int amount)
 {
-    if (this->basket.find(article) != this->basket.end())
+    if (this->basket.find(article) == this->basket.end())
     {
         throw std::runtime_error("Item not found.");
         return;
@@ -99,22 +93,22 @@ void Object::removeBasket(const std::string &article, const int amount)
         return;
     }
 
-    if ((this->basket.find(article)->second - amount) > 0)
+    if ((this->basket.find(article)->second - amount) >= 0)
     {
         (this->basket.find(article)->second) -= amount;
-        return;
+
     }
 
-    if ((this->basket.find(article)->second - amount) == 0)
+    if ((this->basket.find(article)->second) == 0)
     {
         this->basket.erase(this->basket.find(article));
-        return;
+
     }
 }
 
 void Object::showBasket() const
 {
-    if (this->base.empty())
+    if (this->basket.empty())
     {
         throw std::runtime_error("There are no goods in the basket.");
     }
@@ -134,11 +128,8 @@ void Object::pay()
         throw std::runtime_error("The basket is empty");
         return;
     }
+        this->basket.clear();
 
-    for(auto it = this->basket.begin(); it != this->basket.end(); it++ )
-    {
-        this->basket.erase(it);
-    }
 }
 
 std::string Object::creatArticle()

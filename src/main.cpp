@@ -5,7 +5,8 @@
 
 bool is_valid_article(std::string &str)
 {
-	const std::regex txt_regex("[A-Z]{2}-[A-Z]{2}-[A-Z]{2}-[A-Z]{3}-[A-Z]{1}");
+	const std::regex txt_regex("[A-Z]{2}-[A-Z]{2}-[A-Z]{2}-[A-Z]{3}-[A-Z]{1,}");
+
 
 	return std::regex_match(str, txt_regex);
 }
