@@ -61,15 +61,19 @@ class Object
 {
 
 public:
-    Object();
-    ~Object();
+    Object() = default;
+    ~Object() = default;
 
-    void addBase(std::string article, int amount);
+    void addBase(const std::string& article,const  int amount);
+
     void removeBase(const std::string& article,const  int amount);
+
     void showBase() const;
 
     void addBasket(const std::string &article, const int amount);
+
     void removeBasket(const std::string& article,const  int amount);
+    
     void showBasket() const;
 
 	void pay();

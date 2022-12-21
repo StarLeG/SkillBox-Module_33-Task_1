@@ -1,99 +1,132 @@
 #include "base.h"
 
-
-
-Object::Object()
+void Object::addBase(const std::string &article, const int amount)
 {
-}
-
-Object::~Object()
-{
-}
-
-void Object::addBase(std::string article, int amount)
-{
-	if(this->base.find(article) == this->base.end())
-	{
-		this->base.insert(std::make_pair(article, amount));
-	}
-	else
-	{
-		this->base.find(article)->second++;
-	}
-
-}
-void Object::removeBase(const std::string& article,const  int amount)
-{
-	if(this->base.find(article) != this->base.end())
-	{
-		if(this->base.find(article)->second - amount < 0)
-		{
-			throw std::invalid_argument("amount < 0\n");
-		}
-
-		if((this->base.find(article)->second - amount) > 0)
-		{
-			(this->base.find(article)->second) -= amount;
-			return;
-		}
-
-		if((this->base.find(article)->second - amount) == 0)
-		{
-			this->base.erase(this->base.find(article));
-			return;
-		}
-	}
-	else
-	{
-
-		std::cerr << "The item you entered is missing." << std::endl;
-	}
-}
-void Object::showBase() const
-{
-    for (auto it = this->base.begin(); it != this->base.end(); it++)
+    if (this->base.find(article) == this->base.end())
     {
-        std::cout << it->first << " ------ " << it->second << std::endl;
+        this->base.insert(std::make_pair(article, amount));
+    }
+    else
+    {
+        this->base.find(article)->second++;
     }
 }
 
-void Object::addBasket(const std::string& article,const  int amount)
+void Object::removeBase(const std::string &article, const int amount)
 {
-	if(this->base.empty())
-	{
-		throw std::runtime_error("Products are not in the store database.\n");
-	}
-	else
-	{
-		if(this->basket.find(article) == this->basket.end())
-		{
-			this->basket.insert(std::make_pair(article, amount));
-		}
-		else
-		{
-			this->basket.find(article)->second++;
-		}
-	}
+    if (this->base.find(article) != this->base.end())
+    {
+        if (this->base.find(article)->second - amount < 0)
+        {
+            throw std::invalid_argument("amount < 0\n");
+        }
+
+        if ((this->base.find(article)->second - amount) > 0)
+        {
+            (this->base.find(article)->second) -= amount;
+            return;
+        }
+
+        if ((this->base.find(article)->second - amount) == 0)
+        {
+            this->base.erase(this->base.find(article));
+            return;
+        }
+    }
+    else
+    {
+
+        std::cerr << "The item you entered is missing." << std::endl;
+    }
 }
-void Object::removeBasket(const std::string& article,const  int amount)
+
+void Object::showBase() const
 {
+    if (this->base.empty())
+    {
+        throw std::runtime_error("There are no goods in the store base.");
+    }
+    else
+    {
+        for (auto it = this->base.begin(); it != this->base.end(); it++)
+        {
+            std::cout << it->first << " ------ " << it->second << std::endl;
+        }
+    }
 }
+
+void Object::addBasket(const std::string &article, const int amount)
+{
+    if (this->base.empty())
+    {
+        throw std::runtime_error("Products are not in the store database.\n");
+    }
+    else
+    {
+        if (this->basket.find(article) == this->basket.end())
+        {
+            this->basket.insert(std::make_pair(article, amount));
+        }
+        else
+        {
+            this->basket.find(article)->second++;
+        }
+    }
+}
+
+void Object::removeBasket(const std::string &article, const int amount)
+{
+     if (this->basket.find(article) != this->basket.end())
+    {
+        if (this->basket.find(article)->second - amount < 0)
+        {
+            throw std::invalid_argument("amount < 0\n");
+        }
+
+        if ((this->basket.find(article)->second - amount) > 0)
+        {
+            (this->basket.find(article)->second) -= amount;
+            return;
+        }
+
+        if ((this->basket.find(article)->second - amount) == 0)
+        {
+            this->basket.erase(this->basket.find(article));
+            return;
+        }
+    }
+    else
+    {
+
+        std::cerr << "The item you entered is missing." << std::endl;
+    }
+}
+
 void Object::showBasket() const
 {
+    if (this->base.empty())
+    {
+        throw std::runtime_error("There are no goods in the basket.");
+    }
+    else
+    {
+        for (auto it = this->basket.begin(); it != this->basket.end(); it++)
+        {
+            std::cout << it->first << " ------ " << it->second << std::endl;
+        }
+    }
 }
 
 void Object::pay()
 {
-
 }
 
 std::string Object::creatArticle()
 {
-	srand(std::time(nullptr));
+    srand(std::time(nullptr));
 
     std::string article;
     std::string buffer;
-
 
     // генерируем бренд
     int brend = rand() % 7;
@@ -248,4 +281,3 @@ std::string Object::creatArticle()
 
     return article;
 }
-
