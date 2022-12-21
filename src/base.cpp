@@ -1,6 +1,8 @@
 #include "base.h"
 
-Object::Object(/* args */)
+
+
+Object::Object()
 {
 }
 
@@ -20,9 +22,32 @@ void Object::addBase(std::string article, int amount)
 	}
 
 }
-void Object::removeBase(std::string article, int amount)
+void Object::removeBase(const std::string& article,const  int amount)
 {
+	if(this->base.find(article) != this->base.end())
+	{
+		if(this->base.find(article)->second - amount < 0)
+		{
+			throw std::invalid_argument("amount < 0\n");
+		}
 
+		if((this->base.find(article)->second - amount) > 0)
+		{
+			(this->base.find(article)->second) -= amount;
+			return;
+		}
+
+		if((this->base.find(article)->second - amount) == 0)
+		{
+			this->base.erase(this->base.find(article));
+			return;
+		}
+	}
+	else
+	{
+
+		std::cerr << "The item you entered is missing." << std::endl;
+	}
 }
 void Object::showBase() const
 {
@@ -32,21 +57,44 @@ void Object::showBase() const
     }
 }
 
-void Object::addBasket(std::string article, int amount)
+void Object::addBasket(const std::string& article,const  int amount)
 {
+	if(this->base.empty())
+	{
+		throw std::runtime_error("Products are not in the store database.\n");
+	}
+	else
+	{
+		if(this->basket.find(article) == this->basket.end())
+		{
+			this->basket.insert(std::make_pair(article, amount));
+		}
+		else
+		{
+			this->basket.find(article)->second++;
+		}
+	}
 }
-void Object::removeBasket(std::string article, int amount)
+void Object::removeBasket(const std::string& article,const  int amount)
 {
 }
 void Object::showBasket() const
 {
 }
 
+void Object::pay()
+{
+
+}
+
 std::string Object::creatArticle()
 {
+	srand(std::time(nullptr));
+
     std::string article;
     std::string buffer;
-    srand(std::time(nullptr));
+
+
     // генерируем бренд
     int brend = rand() % 7;
 

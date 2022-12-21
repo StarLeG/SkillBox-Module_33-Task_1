@@ -4,6 +4,9 @@
 #include <string>
 #include <ctime>
 #include <iostream>
+#include <stdlib.h>
+
+
 
 enum Color
 {
@@ -62,12 +65,14 @@ public:
     ~Object();
 
     void addBase(std::string article, int amount);
-    void removeBase(std::string article, int amount);
+    void removeBase(const std::string& article,const  int amount);
     void showBase() const;
 
-    void addBasket(std::string article, int amount);
-    void removeBasket(std::string article, int amount);
+    void addBasket(const std::string &article, const int amount);
+    void removeBasket(const std::string& article,const  int amount);
     void showBasket() const;
+
+	void pay();
 
     std::string creatArticle();
 
